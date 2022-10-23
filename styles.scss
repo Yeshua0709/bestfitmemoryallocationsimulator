@@ -1,0 +1,384 @@
+$grey: #0e7490;
+$grey-hover: #67e8f9;
+$light-grey: #444857;
+$mint-green: #4e9d84;
+$mint-green-hover: #5bbd9e;
+$blue: #4c719f;
+$blue-hover: #5b86bd;
+$yellow: #ffdd40; 
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vh;
+    background-color: #ecfeff;
+}
+
+.green { color: limegreen; }
+.active { color: highlight-yellow; }
+.inactive { color: red; }
+.active-btn { border-bottom: 3px solid $yellow; }
+
+.button {
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  padding: 1em;
+  background-color: $blue;
+  cursor: pointer;
+  &:hover {
+    background-color: $blue-hover;
+  }
+  &--create {
+    background-color: $mint-green;
+    &:hover {
+      background-color: $mint-green-hover;
+    }
+  }
+}
+
+.state-indicator { padding: 0.5em; }
+
+.container {
+  font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
+  height: 100vh;
+  width: 100vw;
+  
+  
+  display: flex;
+  
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    
+  }
+  
+  .header {
+    display: flex;
+    
+    .controls {
+      width: 100%;
+      color: snow;
+      background-color: $grey;
+      display: flex;
+      justify-content: space-evenly;
+     
+      
+      &__run-sim {
+        cursor: pointer;
+        &:hover {
+          background-color: #06b6d4;
+        }
+        &:active {
+          background-color: #06b6d4;
+        }
+      }
+      &__compaction {
+        cursor: pointer;
+        &:hover {
+          background-color: #06b6d4;
+        }
+      }
+      &__coalesce {
+        cursor: pointer;
+        &:hover {
+          background-color: #06b6d4;
+        }
+      }
+      
+      div {
+        padding: 1.5em 1.5em;
+        white-space: nowrap;
+        
+      }
+    }
+    
+    div { display: inline-block; }
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-flow: column;
+    height: 100%; 
+    min-width: 285px;
+    background-color: $grey;
+    
+    .title {
+      color: snow;
+      background: #7c3aed;
+      padding: 1.5em 2em;
+      border-bottom: 5px solid #7c3aed;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+    
+    #processes-list {
+      flex: 1;
+      background: #ecfeff;
+      border-radius: 0.15em;
+      margin: 2em;
+      margin-bottom: 3em;
+      overflow: auto;
+      
+      div {
+        padding: 0.2em 0.5em;
+        &:nth-child(even) {
+          background-color: rgba(173, 216, 230, 0.24);
+        }
+      }
+    }
+    
+    #add-process-btn {
+      padding: 0.75em;
+      padding-top: 2.2em;
+      padding-bottom:2.1em;
+      color: snow;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      text-transform: uppercase;
+      background-color: #164e63;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      &:hover {
+        background-color: #155e75;
+      }
+      &:active {
+        background-color: #155e75;
+      }
+    }
+  }
+  
+  .content {
+    flex: 1;
+    display: flex;
+    flex-flow: row;
+    padding:2em;
+    #active-processes {
+      flex: 1;
+      margin: 1em 0 0 0;
+      border-radius: 20px;
+      padding:2em;
+      text-decoration: none;
+      list-style: none;
+      color: $grey;
+      background-color: white;
+      div {
+        padding: 0.2em 0.5em;
+        &:nth-child(even) {
+          background-color: rgba(173, 216, 230, 0.24);
+        }
+      }
+    }
+  }
+  
+  .left-side {
+    display: flex;
+    flex-flow: column;
+  }
+  
+  #current-process {
+    margin: 1em;
+    padding: 1em;
+    color: snow;
+    background-color: $grey;
+    display: flex;
+    flex-flow: column;
+    white-space: nowrap;
+    min-width: 300px;
+    border-radius: 20px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      .state-container { min-width: 70px; }
+    }
+  }
+  
+  #current-process-info {
+    color: $grey;
+    background-color: white;
+    margin-top: 1em;
+    div {
+      padding: 0.2em 0.5em;
+      font-weight: 700;
+      &:nth-child(even) {
+        background-color: rgba(173, 216, 230, 0.24);
+      }
+    }
+  }
+  
+  #status {
+    flex: 1;
+    margin: 1em;
+    padding: 2em;
+    color: snow;
+    background-color: $grey;
+    display: flex;
+    flex-flow: column;
+    white-space: nowrap;
+    min-width: 300px;
+    border-radius: 20px;
+    .header {
+      display: flex;
+      justify-content:center;
+      
+      .state-container { min-width: 70px; }
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 1.5em;
+    }
+  }
+  
+  #memory {
+    flex: 1;
+    margin: 1em;
+    padding: 2em;
+    color: snow;
+    background-color: $grey;
+    display: flex;
+    flex-flow: column;
+    white-space: nowrap;
+    border-radius: 20px;
+    
+    .header {
+      display: flex;
+      justify-content: center;
+      
+      .state-container { display: none; min-width: 156px; }
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 2em;
+    }
+  }
+  
+  #active-memory {
+    flex: 1;
+    color: $grey;
+    background-color: white;
+    padding: 15em;
+    margin-top: 1em;
+    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border-radius: 30px;
+  }
+}
+
+.memory-block {
+  font-weight: 700;
+  color: white;
+  border: 1px solid black;
+  box-shadow: inset 0 0 0.25em black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  &--process {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+
+  &--unallocated {
+    background-color: #facc15;
+    justify-content: center;
+  }
+}
+
+#create-processes-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 60%;
+  width: 700px;
+  transform: translate(-50%, -50%);
+  background-color: snow;
+  box-shadow: 0 5px 10px #191919;
+  display: none;
+  flex-direction: column;
+  border-radius: 30px;
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $grey;
+    color: white;
+    border-radius: 30px 30px 0 0;
+    .modal-title {
+      font-size: 1.1em;
+      font-weight: 700;
+      padding: 1.5em;
+    }
+
+    .modal-close-btn {
+      cursor: pointer;
+      font-weight: 700;
+      padding: 1em;
+    }
+  }
+
+  .modal-body {
+    flex: 1;
+    padding: 1em;
+    position: relative;
+    overflow: auto;
+    .modal-container {
+      height: 100%;
+      overflow: auto;
+
+      input {
+        text-align: right;
+      }
+
+      .form-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        padding-bottom: 1em;
+      }
+
+      #process-forms-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: -1em;
+      }
+
+      .process-form {
+        color: white;
+        background-color: $grey;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 5px 5px #c1c1c1;
+        margin: 1em;
+        padding: 1.5em;
+        max-width: 180px;
+        border-radius: 20px;
+      }
+
+      .form-input-container {
+        margin: 0.25em;
+      }
+
+      .process-label {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+#algorithms{
+  display: none;
+}
+
+.algoTitle{
+  margin-top:-.09em;
+}
+
+.processTitle{
+  color:white;
+  margin-bottom: -1em;
+}
